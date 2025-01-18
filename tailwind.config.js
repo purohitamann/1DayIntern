@@ -2,76 +2,67 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
+        "sky-blue": "#87CEEB",
+        "sunny-yellow": "#FFD700",
+        "grass-green": "#228B22",
+        "sunset-orange": "#FFA500",
+        "pure-white": "#FFFFFF",
+        "deep-black": "#000000",
+        "dark-primary": "#1a1a2e",
+        "dark-secondary": "#16213e",
+        "dark-accent": "#0f3460",
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+      fontFamily: {
+        pixel: ['"Press Start 2P"', "cursive"],
+        silkscreen: ["Silkscreen", "cursive"],
+        pixelify: ['"Pixelify Sans"', "sans-serif"],
+      },
+      boxShadow: {
+        sunny: "0 8px 32px rgba(0,0,0,0.1)",
+        "sunny-hover": "0 12px 48px rgba(0,0,0,0.15)",
+        button: "0 4px 12px rgba(0,0,0,0.15)",
+        "button-hover": "0 8px 24px rgba(0,0,0,0.2)",
+        // Removed "pixel-border"
+      },
+      backgroundImage: {
+        "sunny-gradient":
+          "linear-gradient(135deg, var(--sky-blue) 0%, var(--white) 100%)",
+        "button-gradient":
+          "linear-gradient(135deg, var(--yellow), var(--orange))",
+        "button-hover-gradient":
+          "linear-gradient(135deg, var(--orange), var(--yellow))",
       },
       keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+        shine: {
+          from: { transform: "translateX(-100%)" },
+          to: { transform: "translateX(100%)" },
         },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-5px)" },
         },
+        bounce: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        // Removed "pixel-bounce"
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        shine: "shine 2s infinite linear",
+        float: "float 3s infinite ease-in-out",
+        bounce: "bounce 2s infinite",
+        // Removed "pixel-bounce"
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};

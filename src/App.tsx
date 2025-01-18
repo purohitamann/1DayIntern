@@ -1,22 +1,39 @@
 import { Suspense } from "react";
-import { useRoutes, Routes, Route } from "react-router-dom";
-import Home from "./components";
-import routes from "tempo-routes";
-import Task from "./components/index";
+import { Routes, Route } from "react-router-dom";
+import TaskBoard from "./components/dashboard/TaskBoard";
+import GameBoard from "./components/dashboard/GameBoard";
+import BulletinBoard from "./components/dashboard/BulletinBoard";
 import AIManagerChat from "./components/dashboard/AIManagerChat";
+import Sidebar from "./components/dashboard/Sidebar";
+
 function App() {
   return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/task" element={<Task />} />
-          <Route path="*" element={<h1>404</h1>} />
-          <Route path="/bot" element={<AIManagerChat />} />
-        </Routes>
-        {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
-      </>
-    </Suspense>
+    <div className="flex min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900">
+      {/* Sidebar */}
+      <Sidebar />
+      
+      {/* Main Content */}
+      <main className="flex-1 p-8">
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center h-screen">
+              <div className="glass-effect card-hover rounded-md p-6 text-xl text-white">
+                Loading...
+              </div>
+            </div>
+          }
+        >
+          <div className="max-w-7xl mx-auto">
+            <Routes>
+              <Route path="/" element={<TaskBoard />} />
+              <Route path="/games" element={<GameBoard />} />
+              <Route path="/bulletin" element={<BulletinBoard />} />
+              <Route path="/bot" element={<AIManagerChat />} />
+            </Routes>
+          </div>
+        </Suspense>
+      </main>
+    </div>
   );
 }
 

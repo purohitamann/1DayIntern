@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 import { ScrollArea } from "../ui/scroll-area";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -66,51 +71,107 @@ const AIManagerChat = ({
   };
 
   return (
-    <Card className="w-[350px] h-[600px] bg-white flex flex-col">
-      <CardHeader className="border-b">
-        <CardTitle className="flex items-center gap-2">
-          <Bot className="w-5 h-5" />
+    <Card
+      className="
+        minecraft-panel 
+        card-hover 
+        glass-effect 
+        flex 
+        flex-col 
+        w-[350px] 
+        h-[600px] 
+        rounded-lg 
+        text-pure-white
+      "
+    >
+      {/* Header */}
+      <CardHeader className="p-4 border-b border-white/20">
+        <CardTitle className="flex items-center gap-2 font-silkscreen">
+          <Bot className="w-5 h-5 text-sunny-yellow" />
           AI Manager
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex-1 p-4 flex flex-col">
-        <ScrollArea className="flex-1 pr-4">
+
+      {/* Messages & Input */}
+      <CardContent className="p-4 flex-1 flex flex-col">
+        <ScrollArea className="flex-1 mb-4 pr-2">
           <div className="space-y-4">
             {messages.map((message) => (
               <div
                 key={message.id}
-                className={`flex gap-2 ${message.sender === "user" ? "flex-row-reverse" : ""}`}
+                className={`
+                  flex gap-3
+                  ${message.sender === "user" ? "flex-row-reverse" : ""}
+                `}
               >
-                <Avatar className="w-8 h-8">
+                {/* Avatar */}
+                <Avatar
+                  className="
+                    w-8 
+                    h-8 
+                    bg-transparent
+                    border border-white/30
+                    text-pure-white
+                  "
+                >
                   {message.sender === "bot" ? (
-                    <Bot className="w-5 h-5" />
+                    <Bot className="w-5 h-5 text-sunny-yellow" />
                   ) : (
-                    <User className="w-5 h-5" />
+                    <User className="w-5 h-5 text-sunny-yellow" />
                   )}
                 </Avatar>
+
+                {/* Message Bubble */}
                 <div
-                  className={`rounded-lg p-3 max-w-[80%] ${message.sender === "user" ? "bg-primary text-primary-foreground" : "bg-muted"}`}
+                  className={`
+                    rounded-lg
+                    px-3 py-2
+                    max-w-[75%]
+                    text-sm
+                    ${message.sender === "user"
+                      ? "bg-[#6c8459] text-white"
+                      : "bg-white/10 text-white"
+                    }
+                  `}
                 >
-                  <p className="text-sm">{message.text}</p>
+                  {message.text}
                 </div>
               </div>
             ))}
           </div>
         </ScrollArea>
-        <div className="flex gap-2 mt-4">
+
+        {/* Input + Send */}
+        <div className="flex gap-2">
           <Input
             placeholder="Type your message..."
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             onKeyPress={handleKeyPress}
-            className="flex-1"
+            className="
+              bg-white/10 
+              border 
+              border-white/20 
+              text-white
+              placeholder:text-white/50
+              focus:ring-0
+              focus:border-sunny-yellow
+              flex-1
+            "
           />
           <Button
             size="icon"
             onClick={handleSendMessage}
             disabled={!newMessage.trim()}
+            className="
+              minecraft-btn
+              disabled:opacity-50
+              flex 
+              items-center 
+              justify-center
+            "
           >
-            <Send className="w-4 h-4" />
+            <Send className="w-4 h-4 text-white" />
           </Button>
         </div>
       </CardContent>

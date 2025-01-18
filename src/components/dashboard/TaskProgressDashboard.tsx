@@ -63,20 +63,20 @@ const TaskProgressDashboard = ({ tasks = defaultTasks }: TaskProgressDashboardPr
   const getDifficultyColor = (difficulty: Task["difficulty"]) => {
     switch (difficulty) {
       case "Easy":
-        return "bg-green-500";
+        return "bg-[#99D98C]";
       case "Medium":
-        return "bg-yellow-500";
+        return "bg-[#52B69A]";
       case "Hard":
-        return "bg-red-500";
+        return "bg-[#168AAD]";
       default:
         return "bg-gray-500";
     }
   };
 
   const getProgressColor = (progress: number) => {
-    if (progress >= 75) return "text-green-600";
-    if (progress >= 50) return "text-yellow-600";
-    return "text-gray-600";
+    if (progress >= 75) return "text-[#99D98C]";
+    if (progress >= 50) return "text-[#52B69A]";
+    return "text-[#168AAD]";
   };
 
   return (
