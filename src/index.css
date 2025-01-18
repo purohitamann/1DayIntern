@@ -1,76 +1,291 @@
+/* 1. Import Fonts (Press Start 2P, Silkscreen, Pixelify Sans) */
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=Pixelify+Sans:wght@400;500;600;700&display=swap");
+
+/* 2. Tailwind Base, Components, Utilities */
 @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+@tailwind components;
+@tailwind utilities;
 
-  @layer base {
-    :root {
-      --background: 0 0% 100%;
-      --foreground: 222.2 84% 4.9%;
-
-      --card: 0 0% 100%;
-      --card-foreground: 222.2 84% 4.9%;
-
-      --popover: 0 0% 100%;
-      --popover-foreground: 222.2 84% 4.9%;
-
-      --primary: 222.2 47.4% 11.2%;
-      --primary-foreground: 210 40% 98%;
-
-      --secondary: 210 40% 96.1%;
-      --secondary-foreground: 222.2 47.4% 11.2%;
-
-      --muted: 210 40% 96.1%;
-      --muted-foreground: 215.4 16.3% 46.9%;
-
-      --accent: 210 40% 96.1%;
-      --accent-foreground: 222.2 47.4% 11.2%;
-
-      --destructive: 0 84.2% 60.2%;
-      --destructive-foreground: 210 40% 98%;
-
-      --border: 214.3 31.8% 91.4%;
-      --input: 214.3 31.8% 91.4%;
-      --ring: 222.2 84% 4.9%;
-
-      --radius: 0.5rem;
-    }
-
-    .dark {
-      --background: 222.2 84% 4.9%;
-      --foreground: 210 40% 98%;
-
-      --card: 222.2 84% 4.9%;
-      --card-foreground: 210 40% 98%;
-
-      --popover: 222.2 84% 4.9%;
-      --popover-foreground: 210 40% 98%;
-
-      --primary: 210 40% 98%;
-      --primary-foreground: 222.2 47.4% 11.2%;
-
-      --secondary: 217.2 32.6% 17.5%;
-      --secondary-foreground: 210 40% 98%;
-
-      --muted: 217.2 32.6% 17.5%;
-      --muted-foreground: 215 20.2% 65.1%;
-
-      --accent: 217.2 32.6% 17.5%;
-      --accent-foreground: 210 40% 98%;
-
-      --destructive: 0 62.8% 30.6%;
-      --destructive-foreground: 210 40% 98%;
-
-      --border: 217.2 32.6% 17.5%;
-      --input: 217.2 32.6% 17.5%;
-      --ring: 212.7 26.8% 83.9%;
-    }
+/* 3. Base Layer: Root Variables + Body Defaults */
+@layer base {
+  :root {
+    --sky-blue: #87ceeb;
+    --yellow: #ffd700;
+    --black: #000000;
+    --green: #228b22;
+    --orange: #ffa500;
+    --white: #ffffff;
   }
 
-  @layer base {
-    * {
-      @apply border-border;
-    }
-    body {
-      @apply bg-background text-foreground;
-    }
+  /* Remove universal 2px border from everything */
+  /* If you want a default border somewhere, define it explicitly instead */
+  /*
+  * {
+    @apply border-border;
   }
+  */
+
+  /* Optional utility classes */
+  .border-border {
+    border: 2px solid #333333; /* Example border color */
+  }
+  .bg-background {
+    background-color: #f5f5f5; /* Example background color */
+  }
+  .text-foreground {
+    color: #333333; /* Example text color */
+  }
+
+  /* Body defaults */
+  body {
+    @apply bg-background text-foreground;
+    image-rendering: pixelated;
+    background: linear-gradient(to bottom right, #1a1a2e, #16213e, #1a1a2e);
+    background-attachment: fixed;
+    position: relative;
+  }
+
+  /* Add a subtle overlay pattern */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(#ffffff03 1px, transparent 1px),
+      radial-gradient(#ffffff03 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    pointer-events: none;
+  }
+}
+
+/* 4. Font & Text Styles */
+.game-title {
+  font-family: "Press Start 2P", cursive;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.7), 4px 4px 0 rgba(255, 215, 0, 0.5);
+  color: var(--white);
+  letter-spacing: 2px;
+  animation: pulse 2s infinite;
+}
+
+.heading-text {
+  font-family: "Silkscreen", cursive;
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+  color: var(--white);
+  letter-spacing: 1px;
+}
+
+.body-text {
+  font-family: "Pixelify Sans", sans-serif;
+  color: var(--white);
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.pixelated {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+.pixel-border {
+  position: relative;
+  box-shadow: 0 0 0 2px #2c2c2c, 0 0 0 6px #8d9865, inset 0 0 0 2px #2c2c2c,
+    inset 0 0 0 6px #5c743c;
+}
+/* 5. Panel (Glass / Gradient) Styles */
+.minecraft-panel {
+  @apply relative border-2 bg-opacity-90 backdrop-blur-sm rounded-lg;
+  border-color: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(
+    135deg,
+    rgba(26, 117, 159, 0.95),
+    rgba(22, 138, 173, 0.95)
+  );
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.1),
+    inset 0 2px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.minecraft-panel:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25), inset 0 -2px 0 rgba(0, 0, 0, 0.1),
+    inset 0 2px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* 6. Minecraft-Style Button */
+.minecraft-btn {
+  @apply relative px-4 py-2 rounded-lg font-['Silkscreen'] text-white;
+  background: linear-gradient(135deg, var(--yellow), var(--orange));
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.4);
+  animation: buttonPulse 2s infinite;
+}
+
+.minecraft-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  background: linear-gradient(135deg, var(--orange), var(--yellow));
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), inset 0 -2px 0 rgba(0, 0, 0, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3);
+  animation: none; /* Stop pulsing on hover */
+}
+
+.minecraft-btn:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* 7. Progress Bar with Shimmer Effect */
+.progress-bar {
+  background: linear-gradient(45deg, #34a0a4, #52b69a);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2),
+    0 2px 4px rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  animation: shine 3s infinite linear;
+}
+
+/* 8. Simple Animations */
+
+/* Shimmer for progress bar */
+@keyframes shine {
+  0% {
+    transform: translateX(-200%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+/* Float up/down */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Soft pulse for titles/logos */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Button pulsing (used by .minecraft-btn by default) */
+@keyframes buttonPulse {
+  0% {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(255, 215, 0, 0.4);
+  }
+  70% {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 15px rgba(255, 215, 0, 0);
+  }
+  100% {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(255, 215, 0, 0);
+  }
+}
+
+/* Bounce (e.g. for icons) */
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px) scale(1.1);
+  }
+}
+.bounce {
+  animation: bounce 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* 9. Glass Effect */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* 10. Toast (Success / Error) Animations */
+.success-toast {
+  background: linear-gradient(135deg, #34a0a4, #52b69a);
+  animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.error-toast {
+  background: linear-gradient(135deg, #ff6b6b, #ff4949);
+  animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes slideIn {
+  from {
+    transform: translateY(100%) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* 11. Card Hover Effect */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* 12. Text Highlight (Gradiant Shine) */
+.text-highlight {
+  background: linear-gradient(120deg, var(--yellow) 0%, var(--orange) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: textShine 3s linear infinite;
+}
+@keyframes textShine {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* Pixel-border & pixel-bounce REMOVED to avoid "weird" borders. */

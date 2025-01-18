@@ -1,5 +1,10 @@
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 import { Progress } from "../ui/progress";
 import { Badge } from "../ui/badge";
 import { Trophy, Star, Target, Award, Zap } from "lucide-react";
@@ -58,74 +63,126 @@ const ProgressPanel = ({
   },
 }: ProgressPanelProps) => {
   return (
-    <div className="w-[280px] space-y-4 bg-gray-50 p-4 rounded-lg">
+    <div
+      className="
+        minecraft-panel
+        card-hover
+        w-[280px]
+        p-4
+        rounded-lg
+        space-y-4
+        text-pure-white
+        font-silkscreen
+      "
+    >
       {/* Stats Section */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg font-bold">Your Progress</CardTitle>
+      <Card
+        className="
+          glass-effect
+          rounded-md
+          shadow-md
+          p-4
+          space-y-4
+          text-white
+        "
+      >
+        <CardHeader className="pb-2">
+          <CardTitle className="text-lg font-bold uppercase tracking-wider">
+            Your Progress
+          </CardTitle>
         </CardHeader>
+
         <CardContent className="space-y-4">
+          {/* Level & XP */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Star className="w-5 h-5 text-yellow-500" />
+              <Star className="w-5 h-5 text-sunny-yellow" />
               <span className="text-sm font-medium">Level {stats.level}</span>
             </div>
+
             <Badge
               variant="secondary"
-              className="bg-purple-100 text-purple-700"
+              className="bg-transparent border border-purple-300 text-purple-300"
             >
               {stats.totalPoints} XP
             </Badge>
           </div>
 
-          <div className="grid grid-cols-2 gap-2">
+          {/* Tasks & Streak */}
+          <div className="grid grid-cols-2 gap-2 text-sm">
             <div className="flex items-center gap-2">
-              <Target className="w-4 h-4 text-blue-500" />
-              <span className="text-sm">{stats.tasksCompleted} Tasks</span>
+              <Target className="w-4 h-4 text-sky-blue" />
+              <span>{stats.tasksCompleted} Tasks</span>
             </div>
             <div className="flex items-center gap-2">
-              <Zap className="w-4 h-4 text-orange-500" />
-              <span className="text-sm">{stats.currentStreak} Day Streak</span>
+              <Zap className="w-4 h-4 text-sunset-orange" />
+              <span>{stats.currentStreak} Day Streak</span>
             </div>
           </div>
         </CardContent>
       </Card>
 
       {/* Achievements Section */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg font-bold">Achievements</CardTitle>
+      <Card
+        className="
+          glass-effect
+          rounded-md
+          shadow-md
+          p-4
+          space-y-4
+          text-white
+        "
+      >
+        <CardHeader className="pb-2">
+          <CardTitle className="text-lg font-bold uppercase tracking-wider">
+            Achievements
+          </CardTitle>
         </CardHeader>
+
         <CardContent className="space-y-4">
           {achievements.map((achievement, index) => (
             <TooltipProvider key={index}>
               <Tooltip>
                 <TooltipTrigger className="w-full">
                   <div className="space-y-2">
+                    {/* Title & Status */}
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <Award
-                          className={`w-5 h-5 ${
-                            achievement.completed
-                              ? "text-yellow-500"
+                          className={`w-5 h-5 ${achievement.completed
+                              ? "text-sunny-yellow"
                               : "text-gray-400"
-                          }`}
+                            }`}
                         />
                         <span className="text-sm font-medium">
                           {achievement.title}
                         </span>
                       </div>
                       {achievement.completed && (
-                        <Badge className="bg-green-100 text-green-700">
-                          Complete
+                        <Badge
+                          className="
+                            bg-transparent
+                            border border-green-300
+                            text-green-300
+                            text-xs
+                          "
+                        >
+                          COMPLETE
                         </Badge>
                       )}
                     </div>
-                    <Progress value={achievement.progress} className="h-2" />
+
+                    {/* Progress Bar */}
+                    <Progress
+                      value={achievement.progress}
+                      className="h-2 bg-pure-white/20"
+                    />
                   </div>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>{achievement.description}</p>
+                  <p className="font-silkscreen text-sm text-center">
+                    {achievement.description}
+                  </p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>

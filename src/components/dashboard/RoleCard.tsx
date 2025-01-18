@@ -22,38 +22,83 @@ const RoleCard = ({
   onLearnMore = () => console.log("Learn More"),
 }: RoleCardProps) => {
   return (
-    <Card className="w-full bg-white hover:shadow-lg transition-shadow duration-200">
-      <CardContent className="pt-6">
-        <div className="space-y-4">
-          <div className="flex items-start justify-between">
-            <div className="space-y-1">
-              <h3 className="font-semibold text-lg">{title}</h3>
-              <div className="flex items-center text-muted-foreground">
-                <Building2 className="w-4 h-4 mr-1" />
-                <span>{company}</span>
-              </div>
-            </div>
-            <div className="flex gap-2">
-              <Badge variant="secondary" className="flex items-center gap-1">
-                <Star className="w-4 h-4 text-yellow-500" />
-                {points} XP
-              </Badge>
-              <Badge variant="secondary" className="flex items-center gap-1">
-                <Trophy className="w-4 h-4 text-yellow-500" />
-                {trophies}
-              </Badge>
-            </div>
+    <Card
+      className="
+        minecraft-panel        /* Custom class for a glassy, gradient panel */
+        card-hover            /* Smooth lift on hover */
+        w-full
+        p-4
+        text-pure-white
+        mb-4
+      "
+    >
+      <CardContent className="pb-4">
+        {/* Title & Company */}
+        <div className="space-y-1 font-silkscreen">
+          <h3 className="text-xl font-bold">{title}</h3>
+          <div className="flex items-center text-sm opacity-90">
+            <Building2 className="w-4 h-4 mr-1" />
+            <span>{company}</span>
           </div>
         </div>
+
+        {/* XP & Trophies */}
+        <div className="flex gap-2 mt-4">
+          <Badge
+            variant="secondary"
+            className="
+              bg-transparent
+              border
+              border-white
+              flex items-center gap-1
+              text-sm
+            "
+          >
+            <Star className="w-4 h-4 text-sunny-yellow" />
+            {points} XP
+          </Badge>
+          <Badge
+            variant="secondary"
+            className="
+              bg-transparent
+              border
+              border-white
+              flex items-center gap-1
+              text-sm
+            "
+          >
+            <Trophy className="w-4 h-4 text-sunny-yellow" />
+            {trophies}
+          </Badge>
+        </div>
       </CardContent>
+
+      {/* Footer: Buttons */}
       <CardFooter className="flex gap-2 pt-2">
         <Button
-          className="flex-1 bg-primary hover:bg-primary/90"
+          className="
+            minecraft-btn
+            w-full
+            font-silkscreen
+          "
           onClick={onApply}
         >
           Apply Now
         </Button>
-        <Button variant="outline" className="flex-1" onClick={onLearnMore}>
+        <Button
+          variant="outline"
+          className="
+            minecraft-btn
+            w-full
+            bg-transparent
+            border
+            border-white
+            font-silkscreen
+            hover:bg-pure-white
+            hover:text-deep-black
+          "
+          onClick={onLearnMore}
+        >
           Learn More
         </Button>
       </CardFooter>

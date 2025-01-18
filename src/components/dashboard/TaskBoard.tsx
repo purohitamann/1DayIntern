@@ -77,8 +77,8 @@ const TaskBoard = ({ columns = defaultColumns }: TaskBoardProps) => {
   const onDragEnd = (result: any) => {
     const { source, destination } = result;
 
+    // If the user drops outside the list or no movement
     if (!destination) return;
-
     if (
       source.droppableId === destination.droppableId &&
       source.index === destination.index
@@ -86,36 +86,35 @@ const TaskBoard = ({ columns = defaultColumns }: TaskBoardProps) => {
       return;
     }
 
+    // Find source and destination columns
     const sourceColumn = boardColumns.find(
-      (col) => col.id === source.droppableId,
+      (col) => col.id === source.droppableId
     );
     const destColumn = boardColumns.find(
-      (col) => col.id === destination.droppableId,
+      (col) => col.id === destination.droppableId
     );
 
     if (!sourceColumn || !destColumn) return;
 
+    // Copy tasks
     const sourceTasks = [...sourceColumn.tasks];
     const destTasks =
       source.droppableId === destination.droppableId
         ? sourceTasks
         : [...destColumn.tasks];
 
+    // Remove dragged item from source
     const [removed] = sourceTasks.splice(source.index, 1);
+    // Add dragged item to destination
     destTasks.splice(destination.index, 0, removed);
 
+    // Update columns
     const newColumns = boardColumns.map((col) => {
       if (col.id === source.droppableId) {
-        return {
-          ...col,
-          tasks: sourceTasks,
-        };
+        return { ...col, tasks: sourceTasks };
       }
       if (col.id === destination.droppableId) {
-        return {
-          ...col,
-          tasks: destTasks,
-        };
+        return { ...col, tasks: destTasks };
       }
       return col;
     });
@@ -124,15 +123,41 @@ const TaskBoard = ({ columns = defaultColumns }: TaskBoardProps) => {
   };
 
   return (
-    <div className="w-full h-full bg-gray-50 p-6 rounded-lg shadow-sm">
+    <div
+      className="
+        minecraft-panel
+        card-hover
+        w-full
+        p-6
+        rounded-lg
+        text-pure-white
+        space-y-6
+      "
+    >
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className="flex gap-6 h-full">
+        <div className="flex flex-col md:flex-row gap-6">
           {boardColumns.map((column) => (
             <div
               key={column.id}
-              className="flex-1 min-w-[300px] bg-gray-100 rounded-lg p-4"
+              className="
+                flex-1
+                min-w-[300px]
+                glass-effect
+                p-4
+                rounded-md
+                shadow-md
+                space-y-4
+              "
             >
-              <h3 className="text-lg font-semibold mb-4 text-gray-700">
+              <h3
+                className="
+                  font-silkscreen
+                  text-lg
+                  mb-2
+                  tracking-wide
+                  uppercase
+                "
+              >
                 {column.title}
               </h3>
               <Droppable droppableId={column.id}>
@@ -140,7 +165,7 @@ const TaskBoard = ({ columns = defaultColumns }: TaskBoardProps) => {
                   <div
                     {...provided.droppableProps}
                     ref={provided.innerRef}
-                    className="space-y-4"
+                    className="space-y-4 min-h-[100px]"
                   >
                     {column.tasks.map((task, index) => (
                       <Draggable

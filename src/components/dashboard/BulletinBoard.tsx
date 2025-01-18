@@ -45,33 +45,89 @@ const defaultPosts: Post[] = [
 
 const BulletinBoard = () => {
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl game-title">Bulletin Board</h1>
-        <Button className="minecraft-btn">
-          <MessageSquare className="w-4 h-4 mr-2" />
+    <div
+      className="
+        minecraft-panel 
+        card-hover
+        p-6
+        rounded-lg
+        text-pure-white
+        space-y-6
+      "
+    >
+      {/* Header with 'New Post' Button */}
+      <div className="flex justify-between items-center">
+        <h1 className="game-title text-2xl">Bulletin Board</h1>
+        <Button className="minecraft-btn flex items-center gap-2">
+          <MessageSquare className="w-4 h-4" />
           New Post
         </Button>
       </div>
+
+      {/* Posts */}
       <div className="space-y-4">
         {defaultPosts.map((post) => (
-          <Card key={post.id} className="minecraft-panel">
-            <CardHeader>
+          <Card
+            key={post.id}
+            className="
+              glass-effect
+              shadow-md
+              card-hover
+              p-4
+              rounded-md
+              text-pure-white
+              space-y-3
+            "
+          >
+            <CardHeader className="pb-2">
               <div className="flex justify-between items-center">
-                <CardTitle className="heading-text">{post.title}</CardTitle>
-                <span className="text-sm body-text">{post.timestamp}</span>
+                <CardTitle
+                  className="
+                    heading-text
+                    text-lg
+                    font-bold
+                    uppercase
+                    tracking-wider
+                  "
+                >
+                  {post.title}
+                </CardTitle>
+                <span className="text-xs body-text opacity-80">
+                  {post.timestamp}
+                </span>
               </div>
-              <p className="text-sm body-text">Posted by {post.author}</p>
+              <p className="text-xs body-text opacity-80">
+                Posted by {post.author}
+              </p>
             </CardHeader>
+
             <CardContent>
               <p className="body-text mb-4">{post.content}</p>
-              <div className="flex gap-4">
-                <Button variant="ghost" className="minecraft-btn">
-                  <ThumbsUp className="w-4 h-4 mr-2" />
+              <div className="flex gap-3">
+                <Button
+                  variant="ghost"
+                  className="
+                    minecraft-btn
+                    flex items-center gap-1
+                    px-2 py-1
+                    hover:bg-pure-white/10
+                    text-sm
+                  "
+                >
+                  <ThumbsUp className="w-4 h-4" />
                   {post.likes}
                 </Button>
-                <Button variant="ghost" className="minecraft-btn">
-                  <MessageCircle className="w-4 h-4 mr-2" />
+                <Button
+                  variant="ghost"
+                  className="
+                    minecraft-btn
+                    flex items-center gap-1
+                    px-2 py-1
+                    hover:bg-pure-white/10
+                    text-sm
+                  "
+                >
+                  <MessageCircle className="w-4 h-4" />
                   {post.comments}
                 </Button>
               </div>
