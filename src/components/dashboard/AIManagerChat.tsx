@@ -74,20 +74,27 @@ const AIManagerChat = ({
     <Card
       className="
         minecraft-panel 
-        card-hover 
         glass-effect 
         flex 
         flex-col 
-        w-[350px] 
+        w-[95%] 
+        max-w-[400px] 
         h-[600px] 
+        mx-auto 
         rounded-lg 
         text-pure-white
+        shadow-lg
+        border border-[#3d4a2e]
       "
+      style={{
+        backgroundImage: `url("/assets/minecraft_grass_tile.png")`,
+        backgroundSize: "cover",
+      }}
     >
       {/* Header */}
-      <CardHeader className="p-4 border-b border-white/20">
-        <CardTitle className="flex items-center gap-2 font-silkscreen">
-          <Bot className="w-5 h-5 text-sunny-yellow" />
+      <CardHeader className="p-4 border-b border-white/20 bg-[#4b694e]">
+        <CardTitle className="flex items-center gap-2 font-silkscreen text-lg">
+          <Bot className="w-5 h-5 text-yellow-400" />
           AI Manager
         </CardTitle>
       </CardHeader>
@@ -99,25 +106,24 @@ const AIManagerChat = ({
             {messages.map((message) => (
               <div
                 key={message.id}
-                className={`
-                  flex gap-3
-                  ${message.sender === "user" ? "flex-row-reverse" : ""}
-                `}
+                className={`flex gap-3 ${message.sender === "user" ? "flex-row-reverse" : ""
+                  }`}
               >
                 {/* Avatar */}
                 <Avatar
                   className="
-                    w-8 
-                    h-8 
-                    bg-transparent
-                    border border-white/30
-                    text-pure-white
+                    w-10 
+                    h-10 
+                    bg-[#6c8459] 
+                    border border-[#3d4a2e] 
+                    rounded-full 
+                    shadow-md
                   "
                 >
                   {message.sender === "bot" ? (
-                    <Bot className="w-5 h-5 text-sunny-yellow" />
+                    <Bot className="w-6 h-6 text-yellow-400" />
                   ) : (
-                    <User className="w-5 h-5 text-sunny-yellow" />
+                    <User className="w-6 h-6 text-yellow-400" />
                   )}
                 </Avatar>
 
@@ -125,12 +131,14 @@ const AIManagerChat = ({
                 <div
                   className={`
                     rounded-lg
-                    px-3 py-2
+                    px-4 py-3
                     max-w-[75%]
                     text-sm
+                    font-minecraft
+                    shadow-md
                     ${message.sender === "user"
-                      ? "bg-[#6c8459] text-white"
-                      : "bg-white/10 text-white"
+                      ? "bg-[#7a9364] text-white"
+                      : "bg-white/20 text-white"
                     }
                   `}
                 >
@@ -149,14 +157,15 @@ const AIManagerChat = ({
             onChange={(e) => setNewMessage(e.target.value)}
             onKeyPress={handleKeyPress}
             className="
-              bg-white/10 
+              bg-[#4b694e] 
               border 
-              border-white/20 
+              border-[#3d4a2e] 
               text-white
-              placeholder:text-white/50
+              placeholder:text-gray-300
               focus:ring-0
-              focus:border-sunny-yellow
+              focus:border-yellow-500
               flex-1
+              shadow-inner
             "
           />
           <Button
@@ -164,14 +173,19 @@ const AIManagerChat = ({
             onClick={handleSendMessage}
             disabled={!newMessage.trim()}
             className="
-              minecraft-btn
+              bg-yellow-400
+              text-black
+              font-bold
+              hover:bg-yellow-300
               disabled:opacity-50
               flex 
               items-center 
               justify-center
+              shadow-lg
+              transition-all
             "
           >
-            <Send className="w-4 h-4 text-white" />
+            <Send className="w-5 h-5" />
           </Button>
         </div>
       </CardContent>

@@ -5,13 +5,14 @@ import GameBoard from "./components/dashboard/GameBoard";
 import BulletinBoard from "./components/dashboard/BulletinBoard";
 import AIManagerChat from "./components/dashboard/AIManagerChat";
 import Sidebar from "./components/dashboard/Sidebar";
+import Dashboard from "./components/bot";
 
 function App() {
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900">
       {/* Sidebar */}
       <Sidebar />
-      
+
       {/* Main Content */}
       <main className="flex-1 p-8">
         <Suspense
@@ -28,7 +29,8 @@ function App() {
               <Route path="/" element={<TaskBoard />} />
               <Route path="/games" element={<GameBoard />} />
               <Route path="/bulletin" element={<BulletinBoard />} />
-              <Route path="/bot" element={<AIManagerChat />} />
+              <Route path="/bot" element={<Dashboard />} />
+
             </Routes>
           </div>
         </Suspense>
