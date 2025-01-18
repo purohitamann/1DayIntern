@@ -26,6 +26,10 @@ export default defineConfig({
     preserveSymlinks: true,
     alias: {
       "@": path.resolve(__dirname, "./src"),
+
     },
+  },
+  server: {
+   port: 3000,
   },
 });
