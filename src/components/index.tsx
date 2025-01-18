@@ -156,9 +156,7 @@ function Home() {
           </div>
 
           {/* AI Chat Manager (could be a floating or pinned panel instead) */}
-          <div className="mt-6">
-            <AIManagerChat />
-          </div>
+
         </main>
       </div>
     </div>
