@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import { Trophy, Star } from "lucide-react";
 import GameTaskDetails from "./GameTaskDetails";
 import { defaultGames, type Game } from "@/data/gameData";
+import ProfilePage from "./Profile";
 
 const GameBoard = () => {
   const [openGameId, setOpenGameId] = useState<string | null>(null);
@@ -85,6 +86,10 @@ const GameBoard = () => {
           onTaskToggle={(taskIndex) => handleTaskToggle(openGameId, taskIndex)}
         />
       )}
+
+      <div>
+        <ProfilePage />
+      </div>
     </div>
   );
 };
