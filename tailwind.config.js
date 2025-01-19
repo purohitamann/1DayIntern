@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -31,7 +31,6 @@ module.exports = {
         "sunny-hover": "0 12px 48px rgba(0,0,0,0.15)",
         button: "0 4px 12px rgba(0,0,0,0.15)",
         "button-hover": "0 8px 24px rgba(0,0,0,0.2)",
-        // Removed "pixel-border"
       },
       backgroundImage: {
         "sunny-gradient":
@@ -54,15 +53,13 @@ module.exports = {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
-        // Removed "pixel-bounce"
       },
       animation: {
         shine: "shine 2s infinite linear",
         float: "float 3s infinite ease-in-out",
         bounce: "bounce 2s infinite",
-        // Removed "pixel-bounce"
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [],
 };

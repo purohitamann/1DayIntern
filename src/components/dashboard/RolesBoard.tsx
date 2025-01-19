@@ -11,6 +11,7 @@ import {
 } from "../ui/select";
 import { Search, SlidersHorizontal } from "lucide-react";
 
+// Building up the Interface
 interface Role {
   id: string;
   title: string;
@@ -19,29 +20,33 @@ interface Role {
   trophies: number;
 }
 
-const defaultRoles: Role[] = [
-  {
-    id: "1",
-    title: "Frontend Developer Intern",
-    company: "Google",
-    points: 500,
-    trophies: 3,
-  },
-  {
-    id: "2",
-    title: "UI/UX Design Intern",
-    company: "Apple",
-    points: 450,
-    trophies: 2,
-  },
-  {
-    id: "3",
-    title: "Full Stack Developer Intern",
-    company: "Microsoft",
-    points: 600,
-    trophies: 4,
-  },
-];
+// Function to fetch the data from the User
+async function fetchDataFromAPI(tableName: string): Promise<Role[]> {
+  try {
+    const response = await fetch(`http://127.0.0.1:8080/data/${tableName}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data.data as Role[];
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    // Fallback to default roles if fetching fails
+    return defaultRoles;
+  }
+}
+
+// Example usage
+fetchDataFromAPI("roles").then((roles) => {
+  console.log("Fetched Roles:", roles);
+});
 
 interface RolesBoardProps {
   roles?: Role[];
