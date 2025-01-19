@@ -19,11 +19,11 @@ interface Role {
   points: number;
   trophies: number;
 }
-
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 // Function to fetch the data from the User
 async function fetchDataFromAPI(tableName: string): Promise<Role[]> {
   try {
-    const response = await fetch(`http://127.0.0.1:8080/data/${tableName}`, {
+    const response = await fetch(`${backendURL}/data/${tableName}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -38,21 +38,21 @@ async function fetchDataFromAPI(tableName: string): Promise<Role[]> {
     return data.data as Role[];
   } catch (error) {
     console.error("Error fetching data:", error);
-    // Fallback to default roles if fetching fails
-    return defaultRoles;
   }
 }
 
 // Example usage
-fetchDataFromAPI("roles").then((roles) => {
-  console.log("Fetched Roles:", roles);
-});
+// fetchDataFromAPI("roles").then((roles) => {
+//   console.log("Fetched Roles:", roles);
+// });
 
 interface RolesBoardProps {
   roles?: Role[];
 }
 
-const RolesBoard = ({ roles = defaultRoles }: RolesBoardProps) => {
+const roleArray = await fetchDataFromAPI("roles");
+
+const RolesBoard = ({ roles = roleArray }: RolesBoardProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("relevance");
 

@@ -1,45 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { Button } from "../ui/button";
 import { Trophy, Star } from "lucide-react";
+import { fetchDataFromAPI } from "@/lib/utils";
 
-interface Game {
-  id: string;
+interface Role {
+  id: number;
   title: string;
+  company_id: number;
   description: string;
-  difficulty: string;
-  rewards: number;
-  timeEstimate: string;
+  points: number;
+  requied_skills: string;
 }
 
-const defaultGames: Game[] = [
-  {
-    id: "1",
-    title: "Code Breaker",
-    description: "Solve coding puzzles to unlock achievements",
-    difficulty: "Medium",
-    rewards: 100,
-    timeEstimate: "15-20 mins",
-  },
-  {
-    id: "2",
-    title: "Debug Master",
-    description: "Find and fix bugs in the code",
-    difficulty: "Hard",
-    rewards: 150,
-    timeEstimate: "20-30 mins",
-  },
-  {
-    id: "3",
-    title: "Algorithm Adventure",
-    description: "Learn algorithms through interactive challenges",
-    difficulty: "Easy",
-    rewards: 80,
-    timeEstimate: "10-15 mins",
-  },
-];
+useEffect(() => {
+  fetchDataFromAPI("roles").then((roles) => {
+    console.log("Fetched Roles:", roles);
+  }),
+    [];
+});
 
-const GameBoard = () => {
+const GameBoard = ({ roles = [] }) => {
   return (
     <div
       className="
@@ -54,7 +35,7 @@ const GameBoard = () => {
       <h1 className="game-title text-2xl mb-6">Available Games</h1>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {defaultGames.map((game) => (
+        {roles.map((game) => (
           <Card
             key={game.id}
             className="
@@ -87,20 +68,17 @@ const GameBoard = () => {
               <div className="flex justify-between items-center mb-4 text-sm">
                 <span>
                   <Trophy className="inline-block w-4 h-4 text-sunny-yellow mr-1" />
-                  {game.rewards} XP
+                  {game.points} XP
                 </span>
                 <span>
                   <Star className="inline-block w-4 h-4 text-sunny-yellow mr-1" />
-                  {game.difficulty}
+                  {game.requied_skills}
                 </span>
               </div>
 
               {/* Time Estimate & Action */}
               <div className="flex justify-between items-center">
-                <span className="body-text text-sm">{game.timeEstimate}</span>
-                <Button className="minecraft-btn">
-                  Play Now
-                </Button>
+                <Button className="minecraft-btn">Play Now</Button>
               </div>
             </CardContent>
           </Card>
@@ -108,6 +86,11 @@ const GameBoard = () => {
       </div>
     </div>
   );
+};
+const App: React.FC = () => {
+  const [roles, setRoles] = useState<Role[]>([]);
+
+  return <GameBoard roles={roles} />;
 };
 
 export default GameBoard;
