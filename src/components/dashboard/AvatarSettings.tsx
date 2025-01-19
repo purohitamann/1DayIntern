@@ -1,8 +1,8 @@
 import React from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { Button } from "../ui/button";
-import { Settings } from "lucide-react";
-
+import { LogOut, Settings } from "lucide-react";
+import { useAuth0 } from "@auth0/auth0-react";
 const AVATAR_OPTIONS = [
   {
     id: 1,
@@ -30,6 +30,7 @@ interface AvatarSettingsProps {
 }
 
 const AvatarSettings = ({ currentAvatar, onAvatarChange }: AvatarSettingsProps) => {
+  const { isAuthenticated, logout } = useAuth0();
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -97,6 +98,16 @@ const AvatarSettings = ({ currentAvatar, onAvatarChange }: AvatarSettingsProps) 
               </span>
             </button>
           ))}
+        </div>
+        <div>
+          {isAuthenticated && (
+            <p className="text-xs mt-4 text-center">
+              <LogOut className="h-4 w-4 inline-block" />
+              <span className="ml-2"> <button onClick={() => logout({ returnTo: window.location.origin })}>
+                Log Out
+              </button></span>
+            </p>
+          )}
         </div>
       </DialogContent>
     </Dialog>

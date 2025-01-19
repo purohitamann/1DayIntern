@@ -1,3 +1,5 @@
+'use client';
+import { useEffect } from "react";
 import React, { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -9,22 +11,32 @@ import TaskBoard from "./components/dashboard/TaskBoard";
 import GameBoard from "./components/dashboard/GameBoard";
 import BulletinBoard from "./components/dashboard/BulletinBoard";
 import Dashboard from "./components/bot";
+import { useUser } from "./contexts/UserContext";
 
 const App = () => {
   const { isAuthenticated } = useAuth0();
+  const { user, setUser } = useUser();
+  useEffect(() => {
+    // Fetch the current user and update the state
+    const fetchUser = async () => {
+      const userData = await user; // Replace with your user fetching logic
+      setUser(userData);
+    };
 
+    fetchUser();
+  }, [setUser]);
   return (
     <div>
-      <header className="p-4 bg-gray-800 text-white">
-        <h1 className="text-2xl font-bold">Auth0 React Integration</h1>
-        <div className="mt-2">
+      <header className=" bg-gray-800 text-white">
+
+        <div className="mt-0">
           {!isAuthenticated && <LoginButton />}
-          {isAuthenticated && (
+          {/* {isAuthenticated && (
             <div className="flex items-center gap-4">
               <LogoutButton />
               <Profile />
             </div>
-          )}
+          )} */}
         </div>
       </header>
 
@@ -64,9 +76,9 @@ const App = () => {
       )}
 
       {/* Callback Route */}
-      <Routes>
+      {/* <Routes>
         <Route path="/callback" element={<div>Callback Handler</div>} />
-      </Routes>
+      </Routes> */}
     </div>
   );
 };

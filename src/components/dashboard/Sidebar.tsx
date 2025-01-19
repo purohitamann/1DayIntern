@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Badge } from "../ui/badge";
-
+import { useAuth0 } from "@auth0/auth0-react";
 interface SidebarProps {
   userName?: string;
   userAvatar?: string;
@@ -50,8 +50,9 @@ const Sidebar = ({
     { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com" },
     { icon: Instagram, label: "Instagram", href: "https://instagram.com" },
   ];
-
+  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
   const SidebarContent = () => (
+
     <div
       className="
         flex
@@ -80,15 +81,15 @@ const Sidebar = ({
       >
         1DayIntern
       </div>
-
+      {!isAuthenticated ? <button onClick={() => loginWithRedirect()}>Log Out</button> : <button onClick={() => logout()}>Log Out</button>}
       {/* User Profile */}
       <div className="p-6 space-y-4 bg-[#4b694e] border-b-4 border-[#2c2c2c]">
         <div className="flex items-center gap-4">
           <div className="relative">
             <Avatar className="h-16 w-16 pixel-border">
               <AvatarImage
-                src={userAvatar}
-                alt={userName}
+                src={user?.picture}
+                alt={user?.name}
                 className="pixelated"
               />
               <AvatarFallback className="bg-[#3d4a2e] text-[#f0e6d2]">
@@ -108,7 +109,7 @@ const Sidebar = ({
           </div>
           <div>
             <h2 className="text-lg font-bold heading-text">
-              {userName}
+              {user?.name}
             </h2>
             <div className="flex items-center gap-3 mt-2">
               <Badge
@@ -189,22 +190,6 @@ const Sidebar = ({
         </ul>
       </nav>
 
-      {/* Auth Buttons */}
-      <div className="p-4 bg-[#3d4a2e] border-t-4 border-[#2c2c2c]">
-        <AuthButtons
-          buttonClassName="
-            w-full
-            p-2
-            mb-2
-            font-silkscreen
-            text-[#f0e6d2]
-            pixel-border
-            bg-[#6c8459]
-            hover:bg-[#7a9364]
-            transition-all
-          "
-        />
-      </div>
 
       {/* Social Links */}
       <div className="px-4 py-3 flex justify-center gap-3 bg-[#3d4a2e]">
