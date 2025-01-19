@@ -112,7 +112,7 @@ const GameTaskDetails = ({
 
       {/* The modal (dialog) for tasks */}
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="max-w-2xl max-h-[90vh] glass-effect border-none bg-opacity-90 text-white overflow-y-auto">
+        <DialogContent className="max-w-2xl max-h-[90vh] glass-effect border-none bg-opacity-90 text-white overflow-y-auto pixel-cursor">
           <DialogHeader className="space-y-2 sticky top-0 bg-gray-900/90 backdrop-blur-sm z-10 pb-2">
             <DialogTitle className="text-xl font-bold tracking-wider text-center">
               {game.title}
@@ -120,8 +120,7 @@ const GameTaskDetails = ({
           </DialogHeader>
 
           <div className="space-y-4">
-            {/* Company Description */}
-            <div className="glass-effect p-3 rounded-lg shadow-lg">
+            {/* Company Description */}              <div className="glass-effect p-3 rounded-lg shadow-lg hover:shadow-sunny transition-shadow duration-300">
               <h3 className="text-sm font-semibold mb-2 flex items-center">
                 <Star className="w-5 h-5 mr-2 text-sunny-yellow" />
                 About the Company
@@ -129,8 +128,7 @@ const GameTaskDetails = ({
               <p className="text-gray-200">{game.companyDescription}</p>
             </div>
 
-            {/* Timer */}
-            <div className="glass-effect p-3 rounded-lg text-center shadow-lg">
+            {/* Timer */}              <div className="glass-effect p-3 rounded-lg text-center shadow-lg hover:shadow-sunny transition-shadow duration-300">
               <h3 className="text-sm font-semibold mb-2 flex items-center justify-center">
                 <Clock className="w-4 h-4 mr-2 text-sunny-yellow" />
                 Time Remaining
@@ -142,8 +140,7 @@ const GameTaskDetails = ({
               </div>
             </div>
 
-            {/* Task Description */}
-            <div className="glass-effect p-3 rounded-lg shadow-lg">
+            {/* Task Description */}              <div className="glass-effect p-3 rounded-lg shadow-lg hover:shadow-sunny transition-shadow duration-300">
               <h3 className="text-sm font-semibold mb-2">Task Description</h3>
               <p className="text-gray-200">{game.description}</p>
             </div>

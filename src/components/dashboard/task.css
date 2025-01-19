@@ -1,0 +1,16 @@
+.minecraft-text {
+  font-family: "Press Start 2P", "PixelFont", sans-serif;
+  text-transform: uppercase;
+}
+
+.minecraft-btn {
+  font-family: "Press Start 2P", "PixelFont", sans-serif;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.minecraft-btn:hover {
+  transform: scale(1.05);
+}

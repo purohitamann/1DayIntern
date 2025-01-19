@@ -12,6 +12,7 @@ import GameBoard from "./components/dashboard/GameBoard";
 import BulletinBoard from "./components/dashboard/BulletinBoard";
 import Dashboard from "./components/bot";
 import { useUser } from "./contexts/UserContext";
+import Roles from "./components/dashboard/Roles";
 
 const App = () => {
   const { isAuthenticated } = useAuth0();
@@ -58,6 +59,7 @@ const App = () => {
             >
               <div className="max-w-7xl mx-auto">
                 <Routes>
+                  {/* <Route path="/roles" element={<Roles />} /> */}
                   <Route path="/" element={<TaskBoard />} />
                   <Route path="/games" element={<GameBoard />} />
                   <Route path="/bulletin" element={<BulletinBoard />} />

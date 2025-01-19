@@ -199,6 +199,13 @@ const TaskBoard = ({ columns = defaultColumns }: TaskBoardProps) => {
           ))}
         </div>
       </DragDropContext>
+
+      <div>
+        <h3 className="font-silkscreen text-lg mb-2 tracking-wide uppercase">
+          More Tasks
+        </h3>
+
+      </div>
     </div>
   );
 };

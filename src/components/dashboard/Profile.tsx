@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import CompletedSkillPaths from "./CompletedSkillsPath";
 
 function ProfilePage() {
-    // Imagine you store all tasks from multiple games in parent state
-    const [allTasks, setAllTasks] = useState([
+    const [allTasks] = useState([
         {
             id: "1-4",
             description: "Test the security measures",
@@ -25,7 +24,6 @@ function ProfilePage() {
             gameTitle: "Debug Master",
             skillCategory: "Debugging",
         },
-        // etc.
     ]);
 
     return (

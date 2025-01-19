@@ -68,7 +68,31 @@ async def insert_data(table_name: str, payload: dict):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e) + " -- Insert Data Error")
 
+@app.get("/roles")
+async def get_roles():
+    """
+    Fetch all roles, including their nested tasks, in a single request.
+    """
+    try:
+        # If your 'tasks' table has a foreign key to 'roles' 
+        # (i.e., tasks.role_id → roles.id),
+        # you can use PostgREST embedding with 'select("*, tasks(*)")'.
 
+        response = supabase.table("roles").select("*, tasks(*)").execute()
+
+        # if response.status_code != 200:
+        #     raise HTTPException(
+        #         status_code=400,
+        #         detail=f"Failed to fetch roles: {response.error}"
+        #     )
+
+        return {"data": response.data}
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, 
+            detail=f"Error retrieving roles: {str(e)}"
+        )
 # Run the app if called directly (e.g. `python main.py`)
 if __name__ == "__main__":
     import uvicorn
