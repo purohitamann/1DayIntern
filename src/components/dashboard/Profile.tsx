@@ -27,8 +27,8 @@ function ProfilePage() {
     ]);
 
     return (
-        <div className="space-y-8 p-4">
-            <h1 className="text-3xl font-bold">My Profile</h1>
+        <div className="space-y-8 p-4 pixel-cursor">
+            <h1 className="game-title text-3xl">My Profile</h1>
             <CompletedSkillPaths tasks={allTasks} />
         </div>
     );

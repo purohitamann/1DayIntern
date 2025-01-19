@@ -79,16 +79,17 @@ const SkillPath = () => {
     }
 
     return (
-        <div className="minecraft-panel p-6 rounded-lg text-pure-white space-y-6">
+        <div className="minecraft-panel p-6 rounded-lg text-pure-white space-y-6 pixel-cursor">
             <h1 className="text-2xl font-bold">Skill Path Progress</h1>
 
             {/* XP Progress Bar */}
-            <div className="relative w-full h-6 bg-gray-800 rounded-full">
+            <div className="relative w-full h-6 bg-gray-800 rounded-full overflow-hidden">
+                <div className="absolute inset-0 gold-shine opacity-50"></div>
                 <div
-                    className="absolute top-0 left-0 h-6 bg-green-500 rounded-full transition-all duration-300"
+                    className="absolute top-0 left-0 h-6 progress-bar transition-all duration-300"
                     style={{ width: `${xpProgress}%` }}
                 ></div>
-                <p className="absolute inset-0 flex justify-center items-center text-yellow-400 font-bold">
+                <p className="absolute inset-0 flex justify-center items-center text-sunny-yellow font-bold z-10">
                     {user.xp} XP
                 </p>
             </div>
@@ -97,13 +98,14 @@ const SkillPath = () => {
             <div className="space-y-4">
                 <h2 className="text-xl font-semibold">Next Milestone</h2>
                 {nextMilestone ? (
-                    <div className="p-4 bg-gray-800 rounded-lg shadow-md">
-                        <h3 className="text-lg font-bold text-yellow-400">
+                    <div className="glass-effect p-4 rounded-lg shadow-md hover:shadow-sunny transition-all duration-300 group">
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 gold-shine rounded-md pointer-events-none"></div>
+                        <h3 className="text-lg font-bold text-sunny-yellow group-hover:scale-105 transition-transform">
                             {nextMilestone.title}
                         </h3>
-                        <p>{nextMilestone.description}</p>
-                        <p className="text-sm text-gray-300">
-                            XP Required: {nextMilestone.xpRequired}
+                        <p className="text-white/80">{nextMilestone.description}</p>
+                        <p className="text-sm text-white/60 mt-2">
+                            XP Required: <span className="text-sunny-yellow">{nextMilestone.xpRequired}</span>
                         </p>
                     </div>
                 ) : (
@@ -118,7 +120,7 @@ const SkillPath = () => {
                     user.unlockedRoles.map((role) => (
                         <div
                             key={role}
-                            className="p-4 bg-green-700 rounded-lg text-center text-yellow-300"
+                            className="glass-effect p-4 rounded-lg text-center text-sunny-yellow hover:shadow-sunny transition-all duration-300 hover:scale-105 group"
                         >
                             {role}
                         </div>
