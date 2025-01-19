@@ -13,25 +13,39 @@ import BulletinBoard from "./components/dashboard/BulletinBoard";
 import Dashboard from "./components/bot";
 import { useUser } from "./contexts/UserContext";
 import Roles from "./components/dashboard/Roles";
+import LoginPage from "./components/dashboard/Login";
 
 const App = () => {
   const { isAuthenticated } = useAuth0();
   const { user, setUser } = useUser();
+  const clicked = () => {
+    const audioElement = new Audio("/assets/audio/click.ogg");
+    audioElement.volume = 0.2;
+    audioElement.play();
+  };
+
+
   useEffect(() => {
-    // Fetch the current user and update the state
+    document.addEventListener("click", clicked);
     const fetchUser = async () => {
       const userData = await user; // Replace with your user fetching logic
       setUser(userData);
+
+    };
+    fetchUser();
+    return () => {
+      // Cleanup the event listener on component unmount
+      document.removeEventListener("click", clicked);
     };
 
-    fetchUser();
   }, [setUser]);
+
   return (
     <div>
       <header className=" bg-gray-800 text-white">
 
         <div className="mt-0">
-          {!isAuthenticated && <LoginButton />}
+          {!isAuthenticated && <LoginPage />}
           {/* {isAuthenticated && (
             <div className="flex items-center gap-4">
               <LogoutButton />

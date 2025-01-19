@@ -91,16 +91,32 @@ const GameTaskDetails = ({
     });
 
     // Wait a bit to show confetti, then proceed
+    // Show confetti immediately
+    setShowConfetti(true);
+
+    // Show confetti immediately with higher z-index
+    setShowConfetti(true);
+
+    // Wait longer to show the celebration
     setTimeout(async () => {
-      // 1) (Optional) Generate the PDF file
-      await generateCertificate();
+      try {
+        // 1) Generate the PDF file
+        await generateCertificate();
+      } catch (error) {
+        console.error('Error generating certificate:', error);
+      }
 
       // 2) Close the modal
       onOpenChange(false);
 
       // 3) Reveal the certificate on-screen
       setShowCertificate(true);
-    }, 1000);
+
+      // 4) Hide confetti after 10 seconds
+      setTimeout(() => {
+        setShowConfetti(false);
+      }, 10000); // Increased to 10 seconds
+    }, 2000); // Increased initial delay to 2 seconds
   };
 
   const allTasksCompleted = taskProgress.every((done) => done);
@@ -108,7 +124,11 @@ const GameTaskDetails = ({
   return (
     <>
       {/* Confetti on completion */}
-      {showConfetti && <Confetti numberOfPieces={200} recycle={false} />}
+      {showConfetti && (
+        <div className="fixed inset-0 z-[999] pointer-events-none">
+          <Confetti numberOfPieces={200} recycle={false} />
+        </div>
+      )}
 
       {/* The modal (dialog) for tasks */}
       <Dialog open={open} onOpenChange={onOpenChange}>
