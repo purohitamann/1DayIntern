@@ -43,7 +43,7 @@ const backend = import.meta.env.VITE_BACKEND_URL;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Auth0Provider domain={domain} clientId={clientId} redirectUri={window.location.origin + "/callback"}>
+    <Auth0Provider domain={domain} clientId={clientId} authorizationParams={{ redirect_uri: window.location.origin + "/callback" }}>
       <UserProvider>
         <BrowserRouter basename={basename}>
           <App />

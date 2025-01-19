@@ -103,7 +103,10 @@ const AvatarSettings = ({ currentAvatar, onAvatarChange }: AvatarSettingsProps) 
           {isAuthenticated && (
             <p className="text-xs mt-4 text-center">
               <LogOut className="h-4 w-4 inline-block" />
-              <span className="ml-2"> <button onClick={() => logout({ returnTo: window.location.origin })}>
+              <span className="ml-2"> <button onClick={() =>
+                logout({
+                  logoutParams: { returnTo: window.location.origin },
+                })}>
                 Log Out
               </button></span>
             </p>

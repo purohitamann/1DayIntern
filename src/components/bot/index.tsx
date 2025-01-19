@@ -2,7 +2,7 @@ import React from "react";
 import AIManagerChat from "../dashboard/AIManagerChat";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Calendar } from "../ui/calendar";
-import { DatePickerWithRange } from "../ui/date-picker-with-range";
+import DatePickerWithRange from "../ui/date-picker-with-range"
 import { Badge } from "../ui/badge";
 import { CalendarIcon, Bot } from "lucide-react";
 
@@ -130,7 +130,7 @@ const Dashboard = () => {
                     Due: {task.dueDate.toLocaleDateString()}
                   </div>
                   <div className="w-full bg-[#3d4a2e] h-2 pixel-border">
-                    <div 
+                    <div
                       className="bg-sunny-yellow h-full"
                       style={{ width: '60%' }}
                     />

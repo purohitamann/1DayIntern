@@ -10,9 +10,10 @@ export interface Role {
   title: string;
   description: string;
   difficulty: "Easy" | "Medium" | "Hard";
+  companyDescription: string;
   rewards: number;
   timeEstimate: string;
-  tasks?: {
+  tasks: {
     id: string;
     description: string;
     completed: boolean;
