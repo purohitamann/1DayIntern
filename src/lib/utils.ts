@@ -13,9 +13,10 @@ interface Role {
   points: number;
   required_skills: string;
 }
-const backendURL = import.meta.env.VITE_BACKEND_URL;
 // Function to fetch the data from the User
 export async function fetchDataFromAPI(tableName: string): Promise<Role[]> {
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+
   try {
     const response = await fetch(`${backendURL}/data/${tableName}`, {
       method: "GET",

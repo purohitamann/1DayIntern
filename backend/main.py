@@ -5,7 +5,7 @@ from supabase import create_client, Client
 from dotenv import load_dotenv
 
 # Load environment variables from .env.local (if you name it differently, change here)
-load_dotenv("../.env.local")
+load_dotenv(".env.local")
 
 # Get Supabase credentials
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
