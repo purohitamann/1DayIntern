@@ -4,12 +4,15 @@ interface User {
     id: string;
     name: string;
     email: string;
-
+    trophies: {
+        [gameId: string]: number;  // Track trophies per game
+    };
 }
 
 interface UserContextType {
     user: User | null;
     setUser: React.Dispatch<React.SetStateAction<User | null>>;
+    updateTrophies: (gameId: string) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -17,8 +20,21 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<User | null>(null);
 
+    const updateTrophies = (gameId: string) => {
+        setUser(prevUser => {
+            if (!prevUser) return null;
+            return {
+                ...prevUser,
+                trophies: {
+                    ...prevUser.trophies,
+                    [gameId]: (prevUser.trophies[gameId] || 0) + 1
+                }
+            };
+        });
+    };
+
     return (
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserContext.Provider value={{ user, setUser, updateTrophies }}>
             {children}
         </UserContext.Provider>
     );
