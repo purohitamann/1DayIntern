@@ -39,6 +39,7 @@ TempoDevtools.init();
 const domain = import.meta.env.VITE_OKTA_DOMAIN;
 const clientId = import.meta.env.VITE_CLIENT_ID;
 const basename = import.meta.env.BASE_URL;
+const backend = import.meta.env.VITE_BACKEND_URL;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
